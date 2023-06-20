@@ -1,0 +1,11 @@
+{
+    "gitConfigUser.profiles": [
+        {
+            "label": "FlutterRepository",
+            "email": "SeanBaker513@gmail.com",
+            "userName": "Sean BAker",
+            "selected": false
+        }
+    ],
+    "SAP HANA Database Explorer.displaySapWebAnalyticsStartupNotification": false
+}
