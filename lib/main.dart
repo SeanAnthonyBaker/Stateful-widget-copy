@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'base-client.dart';
 
 void main() => runApp(MyApp());
@@ -51,7 +52,12 @@ class _MyAppState extends State<MyApp> {
                           debugPrint('unsuccessful:');
                           return;
                         }
-                        debugPrint(response.toString());
+                        final odata = jsonDecode(response.body);
+                        final results = odata['value'];
+                        for (var item in results) {
+                          final name = item['Lastname'];
+                          debugPrint(name.toString());
+                        }
                       },
                     ))
                 .toList(),
