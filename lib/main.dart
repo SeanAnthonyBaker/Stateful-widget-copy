@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'base-client.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,8 +42,16 @@ class _MyAppState extends State<MyApp> {
                 .map((e) => ListTile(
                       title: Text(e),
                       tileColor: Colors.grey[100],
-                      onTap: () {
+                      onTap: () async {
                         print(e);
+                        var response = await BaseClient()
+                            .get('/UXTeam')
+                            .catchError((err) {});
+                        if (response == null) {
+                          debugPrint('unsuccessful:');
+                          return;
+                        }
+                        debugPrint(response.toString());
                       },
                     ))
                 .toList(),
