@@ -42,6 +42,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Your Learning Journeys'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () async {
+              // Handle button press
+              var jsonresponse =
+                  await BaseClient().get("/UXTeam").catchError((err) {});
+
+              if (jsonresponse == null) {
+                debugPrint('Unsuccessful');
+                return;
+              }
+
+              //               final Map parsed = response.decode();
+              // Process the response data
+              // Example: Print the first entity in the response
+
+              var entities = jsonresponse['value'];
+
+              if (entities != null && entities.isNotEmpty) {
+                final firstEntity = entities[0];
+                print(firstEntity);
+              }
+              print('hi');
+              print('there');
+            },
+          ),
+        ],
       ),
       body: Card(
         child: ListView.builder(
@@ -49,30 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (BuildContext context, int index) {
             String story = _stories[index];
             return ListTile(
-                title: Text(story),
-                tileColor: Colors.grey[100],
-                onTap: () async {
-                  print(story);
-                  var jsonresponse =
-                      await BaseClient().get("/UXTeam").catchError((err) {});
-
-                  if (jsonresponse == null) {
-                    debugPrint('Unsuccessful');
-                    return;
-                  }
-
-                  //               final Map parsed = response.decode();
-                  // Process the response data
-                  // Example: Print the first entity in the response
-                  debugPrint(jsonresponse.toString());
-                  var entities = jsonresponse['value'];
-                  if (entities != null && entities.isNotEmpty) {
-                    final firstEntity = entities[0];
-                    print(firstEntity);
-                  }
-                  print('hi');
-                  print('there');
-                });
+              title: Text(story),
+              tileColor: Colors.grey[100],
+            );
           },
         ),
       ),
