@@ -53,15 +53,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 tileColor: Colors.grey[100],
                 onTap: () async {
                   print(story);
-                  var response =
-                      await BaseClient().get('/UXTeam').catchError((err) {});
-                  if (response == null) {
+                  var jsonresponse =
+                      await BaseClient().get("/UXTeam").catchError((err) {});
+
+                  if (jsonresponse == null) {
                     debugPrint('Unsuccessful');
                     return;
                   }
 
                   //               final Map parsed = response.decode();
-                  debugPrint(response.toString());
+                  // Process the response data
+                  // Example: Print the first entity in the response
+                  debugPrint(jsonresponse.toString());
+                  var entities = jsonresponse['value'];
+                  if (entities != null && entities.isNotEmpty) {
+                    final firstEntity = entities[0];
+                    print(firstEntity);
+                  }
                   print('hi');
                   print('there');
                 });

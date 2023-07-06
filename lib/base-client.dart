@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 const String baseUrl =
-    'https://8e33b888-a13d-4f80-9e42-615849315b8f.abap.us10.hana.ondemand.com/sap/opu/odata/sap/ZUI_UXTEAM_V2_5551';
+    'https://8e33b888-a13d-4f80-9e42-615849315b8f.abap.us10.hana.ondemand.com/sap/opu/odata4/sap/zui_uxteam_v4_5551/srvd/sap/z_expose_uxteam_5551/0001';
 
 class BaseClient {
   var client = http.Client();
@@ -18,10 +18,11 @@ class BaseClient {
       'Password': 'EjWiXeTwPARtvsFSFYeelnWLXqLrEl5WqKFqSu/r',
       'Accept': 'application/json',
     };
-
+    print(url.toString());
     var response = await client.get(url, headers: _headers);
+    var jsonresponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      return response.body;
+      return jsonresponse;
     } else {
       //throw exception and catch it in UI
     }
