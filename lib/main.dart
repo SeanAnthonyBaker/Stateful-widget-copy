@@ -47,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.settings),
             onPressed: () async {
               // Handle button press
+
               var jsonresponse =
                   await BaseClient().get("/UXTeam").catchError((err) {});
 
@@ -61,11 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
               var entities = jsonresponse['value'];
 
-              if (entities != null && entities.isNotEmpty) {
-                final firstEntity = entities[0];
-                print(firstEntity);
-              }
-              print('hi');
               print('there');
             },
           ),
@@ -77,9 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (BuildContext context, int index) {
             String story = _stories[index];
             return ListTile(
-              title: Text(story),
-              tileColor: Colors.grey[100],
-            );
+                title: Text(story),
+                tileColor: Colors.grey[100],
+                onTap: () {
+                  print('hi');
+                });
           },
         ),
       ),
